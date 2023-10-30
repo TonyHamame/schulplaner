@@ -1,12 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './App';
+import App, { MonthExpenses } from './App';
 import reportWebVitals from './reportWebVitals';
+import { HashRouter, Route, Routes } from 'react-router-dom';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <HashRouter>
+      <Routes>
+        <Route exact path="/" Component={App} />
+        <Route exact path="/:month" Component={MonthExpenses} />
+      </Routes>
+    </HashRouter>
   </React.StrictMode>
 );
 
