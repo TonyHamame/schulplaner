@@ -15,14 +15,18 @@ function App() {
       onValue(expensesRef, snap => {
 
         var MonthsTemp = []
+		var monthName = ""
+		
 		
 
         for(var month in snap.val()){
-          	MonthsTemp[MonthsTemp.length] = {...snap.val()[month], id: month}
+			monthName = addMonthName(month)
+          	MonthsTemp[MonthsTemp.length] = {...snap.val()[month], id: month, monthName: monthName}
         }
         setMonths(MonthsTemp);
       })
   }, [])
+  
 
   return(
 	<div className="App">
@@ -31,9 +35,7 @@ function App() {
 		  {
 			Months.map(month => {
 			  return(
-				<div className='TasksContainer' key={month.id}>
-					<a id='monthTitle' href='#11' key={Math.random()}>Gehalt für den Monat: {month.id}</a>
-				</div>
+					<a className='monthTitle' href={'#' + month.id} key={Math.random()}>{month.monthName}</a>
 			  )
 			})
 		  }
@@ -44,6 +46,51 @@ function App() {
 
 }
 
+function addMonthName(num) {
+	var monthName
+	switch(num.toString()) {
+		case "1":
+			monthName = "Januar"
+			break;
+		case "2":	
+		monthName = "Februar"			
+			break;
+		case "3":
+			monthName = "März"
+			break;
+		case "4":
+			monthName = "April"
+			break;
+		case "5":
+			monthName = "Mai"
+			break;
+		case "6":
+			monthName = "Juni"
+			break;
+		case "7":
+			monthName = "Juli"
+			break;
+		case "8":
+			monthName = "August"
+			break;
+		case "9":
+			monthName = "September"
+			break;
+		case "10":
+			monthName = "Oktober"
+			break;
+		case "11":
+			monthName = "November"
+			break;
+		case "12":
+			monthName = "Dezember"
+			break;
+		default: 
+		break;
+	}
+	return monthName
+  }
+
 
 
 export function MonthExpenses() {
@@ -53,6 +100,7 @@ export function MonthExpenses() {
 
 	const [data, setData] = useState([])
 
+	var monthName = addMonthName(month);
 
 	const titleTbRef = useRef()
 	const costsTbRef = useRef()
@@ -62,7 +110,7 @@ export function MonthExpenses() {
 		onValue(currentMonthRef, snap => {
 			var MonthsTemp = []
 			for(var month in snap.val()){
-				  MonthsTemp[MonthsTemp.length] = {...snap.val()[month], id: month}
+				  MonthsTemp[MonthsTemp.length] = {...snap.val()[month], id: month, monthName: monthName}
 			}
 			setData(MonthsTemp);
 		  })
@@ -97,7 +145,7 @@ export function MonthExpenses() {
 
 	return(
 		<div>
-			<h1>Ausgaben Von Gehalt Nr. {month}</h1>
+			<h1>Ausgaben - Gehalt für {monthName}</h1>
 			<div id='monthExpenses'>
 				{
 					data.map(expense => {

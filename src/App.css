@@ -20,8 +20,30 @@ h1{
 
 
 #tasksContainer {
-  padding: 0px 40px;
+  padding: 30px 40px;
+  margin: 0 40px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
 
+.monthTitle{
+  text-decoration: none;
+  font-size: 42px;
+  background-color: transparent;
+  border: none;
+  padding: 0 30px;
+  width: 250px;
+  height: 250px;
+  box-shadow: 0 0 12px -1px #0006;
+  line-height: 240px;
+  text-align: center;
+  border-radius: 10px;
+  background-color: #fff3;
+}
+
+.monthTitle:hover{
+  background-color: #3aa;
 }
 
 #monthExpenses{
@@ -31,8 +53,7 @@ h1{
   gap: 50px 8vw;
   flex-wrap: wrap;
   justify-content: center;
-  max-height: 90vh;
-  
+  min-height: 90vh;
 }
 
 .expense{
@@ -149,3 +170,4 @@ label{
   background-color: #0b7;
 
 }
+
